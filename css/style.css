@@ -1,0 +1,114 @@
+/* Custom Properties */
+:root {
+    --primario: linear-gradient(180deg, #2af598 0%, #009efd 100%) no-repeat center center fixed;;
+    --secundario:  linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+    --fuente: 'Open Sans', sans-serif;
+}
+
+html{
+    font-size: 62.5%; /** Reset para REMS - 62.5%=10px de 16px **/
+    box-sizing: border-box;
+}
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+body{
+    font-family: var(--fuente);
+    background: var(--primario);
+    background-size: cover;
+}
+
+h1{
+    font-size: 4rem;
+    margin: 0;
+    text-align: center;
+    padding: 20px;
+    color:white;
+}
+.contenedor-barra{
+    margin-top: 3rem;
+    background-color: #1FA769;
+}
+
+.sombra{
+    -webkit-box-shadow: 0px 2px 13px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 13px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 13px 0px rgba(0,0,0,0.75);
+    border-radius: 10px;
+}
+.contenedor{
+    max-width: 111rem;
+    margin: 0 auto;
+}
+.bg-secundario{
+    background: var(--secundario);
+}
+
+/* Formulario*/
+form{
+    padding: 3rem;
+    margin-top: 2rem;
+}
+form legend{
+    font-weight: 600;
+    font-size: 3.5rem;
+    text-align: center;
+    display: block;
+}
+form legend span{
+    font-weight: 400;
+    font-size: 1.5rem;
+    clear: both;
+    display: block;
+    margin-bottom: 2rem;
+}
+
+.campo{
+    padding: .5rem 0;
+    font-size: 1.5rem;
+}
+.campo label{
+    font-size: 1.7rem;
+}
+.campo input[type="text"], .campo input[type="tel"]{
+    width: 100%;
+    border: none;
+    padding: .5rem;
+    height: 3.5rem;
+    margin-top: .5rem;
+   
+}
+
+@media (min-width: 768px){
+    .campos{
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .campo{
+        flex: 0 0 calc(33.3% - 1rem);
+    }
+}
+
+.enviar{
+    display: flex;
+    justify-content: flex-end;
+}
+.campo input[type="submit"]{
+    background: var(--primario);
+    border: none;
+    padding: 1rem 4rem;
+    text-transform: uppercase;
+    transition: background 1s ease-int-out;
+    flex: 1;
+    border-radius: 15px;
+}
+.campo input[type="submit"]:hover{
+    cursor: pointer;
+    background: #38CFB5
+}
+@media (min-width: 768px){
+    .campo input[type="submit"]{
+        flex: 0 0 auto;
+    }
+}
