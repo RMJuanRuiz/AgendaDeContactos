@@ -22,12 +22,51 @@ h1{
     font-size: 4rem;
     margin: 0;
     text-align: center;
-    padding: 20px;
+    padding: 2rem;
     color:white;
 }
+h2{
+    font-size: 3rem;
+    text-align: center;
+    margin:0;
+}
+p{
+    font-size: 2rem;
+}
+
+/* Botones */
+.btn{
+    font-size: 2rem;
+    text-decoration: none;
+}
+.btn-editar{
+    color: #33CBB1;
+}
+.btn-borrar{
+    color: #BB1414;
+}
+.volver{
+    background: var(--primario);
+    border-radius: 5px;
+    text-align: center;
+    color: black;
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: .5rem;
+}
+.volver:hover{
+    cursor: pointer;
+    background: #38CFB5;
+}
+
 .contenedor-barra{
     margin-top: 3rem;
     background-color: #1FA769;
+}
+.barra{
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
 }
 
 .sombra{
@@ -39,9 +78,6 @@ h1{
 .contenedor{
     max-width: 111rem;
     margin: 0 auto;
-}
-.bg-secundario{
-    background: var(--secundario);
 }
 
 /* Formulario*/
@@ -95,7 +131,7 @@ form legend span{
     justify-content: flex-end;
 }
 .campo input[type="submit"]{
-    background: var(--primario);
+    background: #70f1d4;
     border: none;
     padding: 1rem 4rem;
     text-transform: uppercase;
@@ -105,10 +141,80 @@ form legend span{
 }
 .campo input[type="submit"]:hover{
     cursor: pointer;
-    background: #38CFB5
+    background: #65d4bb;
 }
 @media (min-width: 768px){
     .campo input[type="submit"]{
         flex: 0 0 auto;
     }
+}
+
+/* Sección contactos*/
+.contactos{
+    padding: 2rem;
+    margin: 4rem auto;
+    background-color: white;
+}
+.contenedor-contactos{
+    max-width: 80rem;
+    margin: 4rem auto 0 auto;
+}
+
+
+.buscador{
+    width: 100%;
+    height: 4rem;
+    font-size: 1.5rem;
+    border: none;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.total-contactos{
+    text-align: center;
+    color: #51BEFF;
+    font-size: 2.3rem;
+}
+.total-contactos span{
+    font-weight: 600;
+    font-size: 2.8rem;
+}
+
+.contenedor-tabla{
+    overflow: scroll;
+}
+.contenedor-contactos .sombra{
+    box-shadow: 0px 5px 12px 0px rgba(0,0,0,0.75);
+}
+
+.listado-contactos{
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+}
+
+.listado-contactos thead{
+    background: #51BEFF;
+}
+
+.listado-contactos thead th{
+    padding: 1rem 0;
+    text-transform: uppercase;
+}
+
+.listado-contactos tbody td{
+    padding: .5rem;
+    text-align: center;
+}
+
+/* Para editar la posición de los botones editar y borrar 
+.listado-contactos tbody td:nth-child(4){ 
+    text-align: center;
+}
+*/
+
+/* Botón listado-contactos */
+.listado-contactos button{
+    background-color: transparent;
+    border: none;
 }
