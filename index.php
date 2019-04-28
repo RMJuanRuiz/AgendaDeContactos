@@ -1,4 +1,5 @@
 <?php 
+    include 'inc/funciones/funciones.php';
     include 'inc/layout/header.php';
 ?>
 <div class="contenedor-barra">
@@ -21,7 +22,11 @@
         <input type="text" id="buscar" class="buscador sombra" placeholder="Buscar contactos">
 
         <p class="total-contactos">
-            <span>2</span> Contactos
+            <?php 
+                // Obtener contactos
+                $contactos = obtenerContactos();  
+            ?>
+            <span><?php echo $contactos -> num_rows?></span> Contactos
         </p>
 
         <div class="contenedor-tabla">
@@ -35,54 +40,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Juan</td>
-                        <td>EAN</td>
-                        <td>32245198452</td>
-                        <td>
-                            <a class="btn-editar btn" href="editar.php?id=1">
-                                <i class="fas fa-user-edit"></i>
-                            </a>
-
-                            <button data-id="1" type="button" class="btn-borrar btn">
-                                <i class="fas fa-user-times"></i>
-                            </button>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Juan</td>
-                        <td>EAN</td>
-                        <td>32245198452</td>
-                        <td>
-                            <a class="btn-editar btn" href="editar.php?id=1">
-                                <i class="fas fa-user-edit"></i>
-                            </a>
-
-                            <button data-id="1" type="button" class="btn-borrar btn">
-                                <i class="fas fa-user-times"></i>
-                            </button>
-
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td>Juan</td>
-                        <td>EAN</td>
-                        <td>32245198452</td>
-                        <td>
-                            <a class="btn-editar btn" href="editar.php=id=1">
-                                <i class="fas fa-user-edit"></i>
-                            </a>
-
-                            <button data-id="1" type="button" class="btn-borrar btn">
-                                <i class="fas fa-user-times"></i>
-                            </button>
-
-                        </td>
-                    </tr>
+                    <?php
+                    if($contactos -> num_rows){
+                        foreach($contactos as $contacto){ ?>
+                            <tr>
+                                <td><?php echo $contacto['nombre']?></td>
+                                <td><?php echo $contacto['empresa']?></td>
+                                <td><?php echo $contacto['telefono']?></td>
+                                <td>
+                                    <a class="btn-editar btn" href="editar.php?id=<?php echo $contacto['id'];?>">
+                                        <i class="fas fa-user-edit"></i>
+                                    </a>
+        
+                                    <button data-id="<?php echo $contacto['id'];?>" type="button" class="btn-borrar btn">
+                                        <i class="fas fa-user-times"></i>
+                                    </button>
+        
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                    }    
+                ?>
+                         
                 </tbody>
 
             </table>

@@ -39,6 +39,9 @@ p{
     font-size: 2rem;
     text-decoration: none;
 }
+.btn:hover{
+    cursor: pointer;
+}
 .btn-editar{
     color: #33CBB1;
 }
@@ -217,4 +220,35 @@ form legend span{
 .listado-contactos button{
     background-color: transparent;
     border: none;
+}
+
+/* Notificación */
+.notificacion{
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 1rem 3rem;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+@media (min-width: 768px){
+    .notificacion{   
+        top: 5.5rem;
+        right: 1rem;
+    }
+}
+
+.visible{
+    opacity: 1;
+}
+/* Clases notificacion correcta o error*/
+.correcto{
+    background-color: rgb(179,241,117);
+    color: green;
+    font-size: 1.5rem;
+}
+.error{
+    background-color: rgb(238,148,166);
+    color: rgb(163,0,33);
+    font-size: 1.5rem;
 }
