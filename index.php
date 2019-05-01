@@ -22,12 +22,9 @@
         <input type="text" id="buscar" class="buscador sombra" placeholder="Buscar contactos">
 
         <p class="total-contactos">
-            <?php 
-                // Obtener contactos
-                $contactos = obtenerContactos();  
-            ?>
-            <span><?php echo $contactos -> num_rows?></span> Contactos
+            <span></span> Contactos
         </p>
+
 
         <div class="contenedor-tabla">
             <table id="listado-contactos" class="listado-contactos">
@@ -41,6 +38,10 @@
                 </thead>
                 <tbody>
                     <?php
+                    
+                    // Obtener contactos
+                    $contactos = obtenerContactos();  
+                
                     if($contactos -> num_rows){
                         foreach($contactos as $contacto){ ?>
                             <tr>

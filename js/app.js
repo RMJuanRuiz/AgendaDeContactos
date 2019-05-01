@@ -1,5 +1,6 @@
 const formularioContactos = document.querySelector('#contacto'),
-    listadoContactos = document.querySelector('#listado-contactos tbody');
+    listadoContactos = document.querySelector('#listado-contactos tbody'),
+    inputBuscador = document.querySelector('#buscar');
 
 eventListeners();
 
@@ -8,10 +9,17 @@ function eventListeners(){
     formularioContactos.addEventListener('submit', leerFormulario);
 
     // Listener para eliminar contacto
-    listadoContactos.addEventListener('click', eliminarContacto);
+    if(listadoContactos){
+        listadoContactos.addEventListener('click', eliminarContacto);
+    }
 
+    // buscador
+    inputBuscador.addEventListener('input', buscarContactos);
 
+    // Número de contactos
+    numeroContactos();
 }
+
 
 function leerFormulario(e){
     e.preventDefault(); //Para no actualizar la web, prevenir el envento por defecto
@@ -42,6 +50,10 @@ function leerFormulario(e){
             insertarBD(infoContacto);
         }else{
             // Editar contacto
+            // Leer el ID
+            const idRegistro = document.querySelector('#id').value;
+            infoContacto.append('id', idRegistro);
+            actualizarRegistro(infoContacto);
         }
     }
 }
@@ -112,9 +124,41 @@ function insertarBD(datos){
 
             // Mostrar notificacion
             mostrarNotificacion('Contacto creado exitosamente', 'correcto');
+
+            // Actualizar el número de contactos
+            numeroContactos();
         }
     }
     //Enviar los datos
+    xhr.send(datos);
+}
+
+// Actualizar datos
+function actualizarRegistro(datos){
+    //console.log(...datos);
+    // AJAX
+    // Crear el objeto
+    const xhr = new XMLHttpRequest();
+    // Abrir la conexión
+    xhr.open('POST', 'inc/modelos/modelo-contactos.php', true);
+    // Leer la respuesta
+    xhr.onload= function(){
+        if(this.status === 200){
+            const respuesta = JSON.parse(xhr.responseText);
+
+            if(respuesta.respuesta === 'correcto'){
+                mostrarNotificacion('Contacto editado correctamente', 'correcto');
+            }else{
+                mostrarNotificacion('Error... No se edito el contacto!', 'error');
+            }
+            // Después de 3 segundos redireccionar.
+            setTimeout(() => {
+                window.location.href = 'index.php';
+            }, 4000);
+
+        }
+    }
+    // Enviar la petición
     xhr.send(datos);
 }
 
@@ -140,7 +184,21 @@ function eliminarContacto(e){
             xhr.onload = function(){
                 if(this.status === 200){
                     const resultado = JSON.parse(xhr.responseText);
-                    console.log(resultado);
+                    
+                    // Eliminar registro del DOM
+                    if(resultado.respuesta === 'correcto'){
+                        // Eliminar del DOM
+                        e.target.parentElement.parentElement.parentElement.remove();
+
+                        // Mostrar notificación de que se eliminó el contacto
+                        mostrarNotificacion("Se eliminó el contacto!", 'correcto');
+
+                        // Actualizar el número de contactos
+                        numeroContactos();
+                    }else{
+                        // Mostrar notificación de error si no se elimina del DOM
+                        mostrarNotificacion('Hubo un error!', 'error')
+                    }
                 }
             }
 
@@ -175,4 +233,36 @@ function mostrarNotificacion(mensaje, clase){
         }, 3000);
     }, 100);
 
+}
+
+// Buscar contactos
+function buscarContactos(e){
+    const expresion = new RegExp(e.target.value, "i"), // el i del final es para que no tome en cuenta si es mayuscula o minuscula.
+        registros = document.querySelectorAll('tbody tr');
+    
+        registros.forEach(registro => {
+            registro.style.display = 'none';
+
+            // console.log(registro.childNodes[1]); // El childnodes [1] es para filtrar por los nombres.
+            if(registro.childNodes[1].textContent.replace(/\s/g, " ").search(expresion) != -1){ // Textcontent para traer solo el texto, replace() hace, este if pasa como true aquellos nombres que inicien con las letras que uno coloque en el buscador.
+                    registro.style.display = 'table-row';
+            }
+            numeroContactos();
+            
+        })
+}
+
+// Mostrar el número de contactos
+function numeroContactos(){
+    const totalContactos = document.querySelectorAll('tbody tr'),
+        contenedorNumero = document.querySelector('.total-contactos span');
+    
+    let total = 0;
+    totalContactos.forEach(contacto => {
+        if(contacto.style.display == '' || contacto.style.display == 'table-row'){
+            total++;
+        }
+    });
+    
+    contenedorNumero.textContent = total;
 }
