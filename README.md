@@ -1,4 +1,4 @@
 # Contacts agenda
-This is a personal proyect where user can add, edit and delete people to the agenda.
+This is a personal proyect where user can add, edit and delete people from the agenda.
 
-The technologies used are HTML, CSS, JavaScript, PHP and MySql
+The technologies I used are HTML, CSS, JavaScript, PHP and MySql
